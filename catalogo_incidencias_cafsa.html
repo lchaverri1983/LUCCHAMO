@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo de Incidencias — CAFSA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --negro:#000000;
+    --gris:#8A8C8E;
+    --gris-claro:#F4F4F5;
+    --blanco:#FFFFFF;
+    --acento:#A8B8C8;
+    --acento-oscuro:#7C8FA3;
+    --rojo:#B3261E;
+    --rojo-bg:#FBEAE9;
+    --amarillo:#8A6D00;
+    --amarillo-bg:#FBF3D9;
+    --verde:#1E6B3C;
+    --verde-bg:#E7F3EA;
+    --radio:14px;
+    --sombra: 0 1px 2px rgba(0,0,0,0.04), 0 6px 20px rgba(0,0,0,0.05);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--blanco);
+    color:var(--negro);
+    font-family:'Open Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:48px 32px 80px;
+  }
+  header{
+    position:relative;
+    padding-bottom:28px;
+    margin-bottom:36px;
+  }
+  .eyebrow{
+    font-family:'Montserrat',sans-serif;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gris);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .diamond{
+    width:8px;height:8px;
+    background:var(--acento);
+    transform:rotate(45deg);
+    display:inline-block;
+    flex-shrink:0;
+  }
+  h1{
+    font-family:'Montserrat',sans-serif;
+    font-weight:800;
+    font-size:clamp(28px,3.6vw,40px);
+    line-height:1.1;
+    margin:0 0 12px;
+    letter-spacing:-.01em;
+  }
+  .subtitle{
+    font-size:15px;
+    color:var(--gris);
+    max-width:620px;
+    line-height:1.55;
+    margin:0;
+  }
+  .corner-motif{
+    position:absolute;
+    top:-8px;
+    right:-8px;
+    display:grid;
+    grid-template-columns:repeat(3,10px);
+    grid-template-rows:repeat(3,10px);
+    gap:6px;
+    opacity:.9;
+  }
+  .corner-motif span{
+    width:10px;height:10px;
+    background:var(--acento);
+    transform:rotate(45deg);
+  }
+  .corner-motif span:nth-child(1),
+  .corner-motif span:nth-child(3),
+  .corner-motif span:nth-child(7),
+  .corner-motif span:nth-child(9){opacity:.25;}
+  .corner-motif span:nth-child(2),
+  .corner-motif span:nth-child(4),
+  .corner-motif span:nth-child(6),
+  .corner-motif span:nth-child(8){opacity:.5;}
+  .summary{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:34px;
+  }
+  .stat{
+    border:1px solid #EAEAEA;
+    border-radius:var(--radio);
+    padding:18px 20px;
+    background:var(--blanco);
+    box-shadow:var(--sombra);
+    position:relative;
+    overflow:hidden;
+  }
+  .stat .num{
+    font-family:'Montserrat',sans-serif;
+    font-weight:800;
+    font-size:32px;
+    line-height:1;
+  }
+  .stat .lab{
+    margin-top:6px;
+    font-size:12.5px;
+    color:var(--gris);
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .stat.total .num{color:var(--negro);}
+  .stat.abierta .num{color:var(--rojo);}
+  .stat.proceso .num{color:var(--amarillo);}
+  .stat.cerrada .num{color:var(--verde);}
+  .stat::after{
+    content:"";
+    position:absolute;
+    width:60px;height:60px;
+    right:-22px;bottom:-22px;
+    background:var(--gris-claro);
+    transform:rotate(45deg);
+    z-index:0;
+  }
+  .stat .num, .stat .lab{position:relative;z-index:1;}
+  .filters{
+    display:flex;
+    gap:8px;
+    margin-bottom:26px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .filters .hint{
+    font-size:12.5px;
+    color:var(--gris);
+    margin-right:6px;
+    font-weight:600;
+  }
+  .chip{
+    font-family:'Open Sans',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    padding:8px 16px;
+    border-radius:100px;
+    border:1px solid #E2E2E2;
+    background:var(--blanco);
+    color:var(--negro);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .chip:hover{border-color:var(--acento);}
+  .chip.active{
+    background:var(--negro);
+    border-color:var(--negro);
+    color:var(--blanco);
+  }
+  .chip[data-estado="Abierta"].active{background:var(--rojo);border-color:var(--rojo);}
+  .chip[data-estado="En proceso"].active{background:var(--amarillo);border-color:var(--amarillo);}
+  .chip[data-estado="Cerrada"].active{background:var(--verde);border-color:var(--verde);}
+  .grid{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .card{
+    border:1px solid #EAEAEA;
+    border-radius:var(--radio);
+    background:var(--blanco);
+    box-shadow:var(--sombra);
+    padding:22px 24px;
+    position:relative;
+  }
+  .card.abierta{border-left:4px solid var(--rojo);}
+  .card.en-proceso{border-left:4px solid var(--amarillo);}
+  .card.cerrada{border-left:4px solid var(--verde);}
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    margin-bottom:12px;
+  }
+  .id-block{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  .id{
+    font-family:'Montserrat',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    color:var(--gris);
+    letter-spacing:.03em;
+  }
+  .proceso{
+    font-family:'Montserrat',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    color:var(--negro);
+  }
+  .pill{
+    font-size:11.5px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    padding:5px 12px;
+    border-radius:100px;
+    white-space:nowrap;
+  }
+  .pill.abierta{background:var(--rojo-bg);color:var(--rojo);}
+  .pill.en-proceso{background:var(--amarillo-bg);color:var(--amarillo);}
+  .pill.cerrada{background:var(--verde-bg);color:var(--verde);}
+  .desc{
+    font-size:14.5px;
+    line-height:1.6;
+    color:#222;
+    margin:0 0 16px;
+  }
+  .fields{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:14px 22px;
+    padding-top:14px;
+    border-top:1px solid #F0F0F0;
+  }
+  .field .k{
+    font-size:10.5px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--gris);
+    margin-bottom:4px;
+  }
+  .field .v{
+    font-size:13.5px;
+    line-height:1.5;
+    color:var(--negro);
+  }
+  .notas{
+    margin-top:14px;
+    padding:12px 14px;
+    background:var(--gris-claro);
+    border-radius:10px;
+    font-size:13px;
+    line-height:1.55;
+    color:#333;
+  }
+  .notas .k{
+    font-size:10.5px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--gris);
+    margin-bottom:4px;
+    display:block;
+  }
+  .meta-dates{
+    display:flex;
+    gap:18px;
+    font-size:12px;
+    color:var(--gris);
+    margin-top:14px;
+  }
+  .meta-dates b{color:var(--negro);}
+  footer{
+    margin-top:44px;
+    padding-top:22px;
+    border-top:1px solid #EEEEEE;
+    font-size:12.5px;
+    color:var(--gris);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  @media (max-width:720px){
+    .summary{grid-template-columns:repeat(2,1fr);}
+    .card-top{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="corner-motif">
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </div>
+    <div class="eyebrow"><span class="diamond"></span> CAFSA Grupo Financiero — Foro de Operaciones</div>
+    <h1>Catálogo de Incidencias de Procesos Operativos</h1>
+    <p class="subtitle">Cierre de mes Junio 2026 · Seguimiento semanal hasta el cierre y curación de raíz de cada punto, con evaluación de automatización.</p>
+  </header>
+
+  <section class="summary">
+    <div class="stat total"><div class="num" id="statTotal">0</div><div class="lab">Total incidencias</div></div>
+    <div class="stat abierta"><div class="num" id="statAbierta">0</div><div class="lab">Abiertas</div></div>
+    <div class="stat proceso"><div class="num" id="statProceso">0</div><div class="lab">En proceso</div></div>
+    <div class="stat cerrada"><div class="num" id="statCerrada">0</div><div class="lab">Cerradas</div></div>
+  </section>
+
+  <div class="filters">
+    <span class="hint">Filtrar:</span>
+    <button class="chip active" data-estado="Todas">Todas</button>
+    <button class="chip" data-estado="Abierta">Abierta</button>
+    <button class="chip" data-estado="En proceso">En proceso</button>
+    <button class="chip" data-estado="Cerrada">Cerrada</button>
+  </div>
+
+  <section class="grid" id="grid"></section>
+
+  <footer>
+    <span>Fuente: hilo "CAFSA TI — Reportes cierre de mes Junio 2026" y correo "ERRORES MES DE JUNIO" (Johanna Villegas Salas, 09/07/2026).</span>
+    <span>Actualizado al 10/07/2026</span>
+  </footer>
+
+</div>
+
+<script>
+const incidencias = [
+  {
+    id:"INC-01", estado:"Cerrada",
+    proceso:"Cierre de mes — Cartera",
+    desc:"Operaciones 39928, 42615 y 43075 (Desarrollo Inmobiliario Nacascolo) quedaron con línea financiera REL debiendo ser PUM, al salir del Grupo Vinculado a nivel SUGEF. La operación 50758 también mantenía línea financiera REL sin actualizar.",
+    sistema:"Abanks",
+    operacion:"Op. 39928, 42615, 43075, 50758",
+    impacto:"Reporte de cartera y archivo auxiliar de Financiera con línea financiera incorrecta",
+    causa:"El cambio de estatus de vinculación en SUGEF no se propagó automáticamente al campo de línea financiera en Abanks",
+    responsable:"Sergio Barquero / Kevin Morales",
+    automatizable:"Sí",
+    fechaDeteccion:"01/07/2026",
+    fechaCierre:"01/07/2026",
+    notas:"Corrección aplicada y archivo auxiliar de Financiera regenerado el 01/07."
+  },
+  {
+    id:"INC-02", estado:"Cerrada",
+    proceso:"Cierre de mes — Cartera",
+    desc:"La operación 49459 (desembolsada en febrero 2026) perdió el Tipo de garantía 10 que mantenía en meses anteriores, quedando sin tipo de garantía registrado.",
+    sistema:"Abanks / MIRA",
+    operacion:"Op. 49459",
+    impacto:"Reporte de cartera con garantía inconsistente",
+    causa:"No determinada — \"desconocemos por qué se desligó la garantía\" (Johanna Villegas)",
+    responsable:"Johanna Villegas Salas",
+    automatizable:"Pendiente investigar causa antes de automatizar",
+    fechaDeteccion:"01/07/2026",
+    fechaCierre:"01/07/2026",
+    notas:"Se restableció Tipo garantía 10 el 01/07. Riesgo de reincidencia si no se identifica la causa raíz."
+  },
+  {
+    id:"INC-03", estado:"Cerrada",
+    proceso:"Cierre de mes — Cartera",
+    desc:"Cliente identificación 801020504 (operación 50758) no estaba registrado como \"vinculado\" en Abanks.",
+    sistema:"Abanks",
+    operacion:"Op. 50758 — Costa Resende Rosely Figueiredo",
+    impacto:"Clasificación de vinculación incorrecta en cartera",
+    causa:"No documentada",
+    responsable:"Karla Morales / Sergio Barquero",
+    automatizable:"Por evaluar",
+    fechaDeteccion:"03/07/2026",
+    fechaCierre:"07/07/2026",
+    notas:"Corrección confirmada el 07/07; cartera y reportes regenerados con el ajuste."
+  },
+  {
+    id:"INC-04", estado:"En proceso",
+    proceso:"Cierre de mes — Cartera",
+    desc:"La tasa de la operación 29460, ya corregida en producción (9.39%), no se reflejaba en el reporte de cartera porque este toma el dato de un respaldo (tabla pr_fin_mes) y no de la tabla operativa (pr_prestamos). El XML sí toma el dato correcto de pr_prestamos.",
+    sistema:"Reporte de Cartera (pr_fin_mes) vs. XML (pr_prestamos)",
+    operacion:"Op. 29460 (y otras con tasa corregida en producción)",
+    impacto:"Desincronización entre el reporte de cartera y el dato real de producción",
+    causa:"El reporte de cartera lee de una tabla de respaldo en lugar de la tabla operativa vigente",
+    responsable:"Kevin Morales Robles (TI)",
+    automatizable:"Sí",
+    fechaDeteccion:"07/07/2026",
+    fechaCierre:"",
+    notas:"Pendiente migrar el cambio a pr_fin_mes y regenerar la cartera; evaluar que el reporte lea siempre de pr_prestamos."
+  },
+  {
+    id:"INC-05", estado:"Abierta",
+    proceso:"Cierre de mes — Transversal",
+    desc:"Persistencia de errores mes a mes por dependencia de revisiones manuales en el cierre, sin un control cruzado que detecte diferencias de forma sistemática.",
+    sistema:"Proceso de cierre de mes (general)",
+    operacion:"Transversal a todo el cierre",
+    impacto:"Riesgo alto por sensibilidad de la información financiera",
+    causa:"Ausencia de validación automatizada y control cruzado en el proceso de cierre",
+    responsable:"Luis Aguilar Morales / José Paulo Martínez",
+    automatizable:"Sí — es el objetivo central de la mejora solicitada",
+    fechaDeteccion:"09/07/2026",
+    fechaCierre:"",
+    notas:"Escalado por Carlos Castro Riba (09/07); origina el acuerdo de catálogo de incidencias y monitoreo semanal presentado en el Foro de Operaciones."
+  },
+  {
+    id:"INC-06", estado:"Abierta",
+    proceso:"Formalización / Garantías",
+    desc:"En al menos 15 operaciones en colones y 11 en dólares con abonos extraordinarios, el monto de garantía no se actualizó en Abanks ni en MIRA, y el dato correcto de desembolso tampoco se refleja en Abanks (diferencias entre Total Depósito y Carátula).",
+    sistema:"Abanks / MIRA",
+    operacion:"Ops. 13369–13547 (colones) y 13370–13546 (dólares) — detalle completo en anexo de Johanna Villegas",
+    impacto:"Montos de garantía y desembolso desactualizados en múltiples operaciones",
+    causa:"Por determinar — posible falla en la actualización automática tras registrar abonos extraordinarios",
+    responsable:"Johanna Villegas Salas / TI",
+    automatizable:"Sí — automatizar actualización de garantía y desembolso tras abono extraordinario",
+    fechaDeteccion:"09/07/2026",
+    fechaCierre:"",
+    notas:"Reportado en correo \"ERRORES MES DE JUNIO\" (09/07). Requiere validación caso a caso."
+  },
+  {
+    id:"INC-07", estado:"Abierta",
+    proceso:"Formalización / Registro de operaciones",
+    desc:"Se identificaron dos operaciones duplicadas en el mes de junio.",
+    sistema:"No especificado en el reporte",
+    operacion:"Detalle en anexo visual de Johanna Villegas (no incluido en texto del correo)",
+    impacto:"Por cuantificar",
+    causa:"Por determinar",
+    responsable:"Johanna Villegas Salas",
+    automatizable:"Por evaluar — requiere control de duplicados",
+    fechaDeteccion:"09/07/2026",
+    fechaCierre:"",
+    notas:"Reportado en correo \"ERRORES MES DE JUNIO\" (09/07). Solicitar a Johanna el detalle de las dos operaciones para dar seguimiento puntual."
+  },
+  {
+    id:"INC-08", estado:"Abierta",
+    proceso:"Contabilización",
+    desc:"Se duplicó el rubro 94 (monto de bono), quedando también reflejado dentro del rubro 9 \"CTA XPAGAR PURDY MOTOR\". Adicionalmente, se identificó un menor monto en comisión.",
+    sistema:"No especificado en el reporte",
+    operacion:"No especificada",
+    impacto:"Diferencia de ₡23,986.13 en comisión; valor correcto a actualizar: ₡163,616.39",
+    causa:"Por determinar",
+    responsable:"Johanna Villegas Salas",
+    automatizable:"Por evaluar",
+    fechaDeteccion:"09/07/2026",
+    fechaCierre:"",
+    notas:"Reportado en correo \"ERRORES MES DE JUNIO\" (09/07)."
+  }
+];
+
+function slug(estado){
+  return estado.toLowerCase().replace(/\s+/g,'-');
+}
+
+function render(filter){
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  const list = filter === 'Todas' ? incidencias : incidencias.filter(i => i.estado === filter);
+
+  list.forEach(inc => {
+    const card = document.createElement('div');
+    card.className = `card ${slug(inc.estado)}`;
+    card.innerHTML = `
+      <div class="card-top">
+        <div>
+          <div class="id-block">
+            <span class="id">${inc.id}</span>
+          </div>
+          <div class="proceso">${inc.proceso}</div>
+        </div>
+        <span class="pill ${slug(inc.estado)}">${inc.estado}</span>
+      </div>
+      <p class="desc">${inc.desc}</p>
+      <div class="fields">
+        <div class="field"><div class="k">Sistema(s)</div><div class="v">${inc.sistema}</div></div>
+        <div class="field"><div class="k">Operación / Cliente</div><div class="v">${inc.operacion}</div></div>
+        <div class="field"><div class="k">Impacto</div><div class="v">${inc.impacto}</div></div>
+        <div class="field"><div class="k">Causa raíz</div><div class="v">${inc.causa}</div></div>
+        <div class="field"><div class="k">Responsable</div><div class="v">${inc.responsable}</div></div>
+        <div class="field"><div class="k">¿Automatizable?</div><div class="v">${inc.automatizable}</div></div>
+      </div>
+      <div class="notas"><span class="k">Seguimiento / Notas</span>${inc.notas}</div>
+      <div class="meta-dates">
+        <span>Detectada: <b>${inc.fechaDeteccion}</b></span>
+        <span>Cierre: <b>${inc.fechaCierre || '—'}</b></span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function updateStats(){
+  document.getElementById('statTotal').textContent = incidencias.length;
+  document.getElementById('statAbierta').textContent = incidencias.filter(i=>i.estado==='Abierta').length;
+  document.getElementById('statProceso').textContent = incidencias.filter(i=>i.estado==='En proceso').length;
+  document.getElementById('statCerrada').textContent = incidencias.filter(i=>i.estado==='Cerrada').length;
+}
+
+document.querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    render(chip.dataset.estado);
+  });
+});
+
+updateStats();
+render('Todas');
+</script>
+</body>
+</html>
