@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUCCHAMO — Índice de proyectos</title>
+<meta name="description" content="Índice de proyectos HTML de Lucía Chaverri Morales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --negro: #000000;
+    --gris: #6E7174;
+    --gris-suave: #8A8C8E;
+    --gris-claro: #F3F4F5;
+    --blanco: #FFFFFF;
+    --acento: #A8B8C8;
+    --acento-oscuro: #7C8FA3;
+    --borde: #E4E6E8;
+    --display: 'Montserrat', sans-serif;
+    --cuerpo: 'Open Sans', sans-serif;
+    --radio: 14px;
+    --sombra: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.05);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--blanco);
+    color: var(--negro);
+    font-family: var(--cuerpo);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .rombo {
+    width: 10px;
+    height: 10px;
+    background: var(--negro);
+    transform: rotate(45deg);
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .rombo.acento { background: var(--acento); }
+  .rombo.suave { background: var(--gris-suave); }
+
+  .encabezado {
+    border-bottom: 1px solid var(--borde);
+    padding: 40px 48px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .encabezado::before,
+  .encabezado::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: var(--gris-claro);
+    transform: rotate(45deg);
+  }
+  .encabezado::before { top: -11px; right: 64px; }
+  .encabezado::after  { bottom: -11px; right: 40px; background: var(--acento); opacity: .5; }
+
+  .marca { display: flex; align-items: center; gap: 10px; }
+  .marca .rombo { width: 14px; height: 14px; }
+  .marca h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+  .subtitulo {
+    font-family: var(--cuerpo);
+    color: var(--gris);
+    font-size: 15px;
+    margin: 10px 0 0 24px;
+    max-width: 560px;
+    line-height: 1.5;
+  }
+  .subtitulo strong { color: var(--negro); font-weight: 600; }
+
+  .filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 24px 48px 0;
+  }
+  .chip {
+    font-family: var(--cuerpo);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--borde);
+    background: var(--blanco);
+    color: var(--gris);
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .chip:hover { border-color: var(--acento-oscuro); color: var(--negro); }
+  .chip.activo { background: var(--negro); border-color: var(--negro); color: var(--blanco); }
+
+  .contenedor { padding: 28px 48px 64px; max-width: 1240px; margin: 0 auto; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .tarjeta {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    padding: 22px;
+    box-shadow: var(--sombra);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .tarjeta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05), 0 16px 32px rgba(0,0,0,0.08);
+  }
+  .tarjeta-etiqueta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gris);
+  }
+  .tarjeta h2 {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+  }
+  .tarjeta p {
+    font-size: 14px;
+    color: var(--gris);
+    line-height: 1.55;
+    margin: 0;
+    flex-grow: 1;
+  }
+  .tarjeta-pie {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid var(--gris-claro);
+    font-size: 12.5px;
+    color: var(--gris-suave);
+  }
+  .tarjeta-abrir { font-weight: 700; color: var(--negro); display: inline-flex; align-items: center; gap: 6px; }
+  .tarjeta-abrir svg { transition: transform .15s ease; }
+  .tarjeta:hover .tarjeta-abrir svg { transform: translateX(3px); }
+  .tarjeta-link { display: contents; }
+  .tarjeta[data-categoria="ejemplo"] { background: var(--gris-claro); border-style: dashed; }
+
+  .vacio { text-align: center; padding: 80px 20px; color: var(--gris-suave); }
+  .vacio .rombo { margin: 0 auto 16px; }
+  .vacio h3 { font-family: var(--display); color: var(--negro); margin: 0 0 6px; }
+  .vacio p { font-size: 14px; margin: 0; }
+
+  .pie {
+    border-top: 1px solid var(--borde);
+    padding: 28px 48px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--gris-suave);
+  }
+  .pie .marca-pie { display: flex; align-items: center; gap: 8px; }
+
+  @media (max-width: 640px) {
+    .encabezado, .filtros, .contenedor, .pie { padding-left: 24px; padding-right: 24px; }
+    .subtitulo { margin-left: 0; }
+  }
+  a:focus-visible, .chip:focus-visible { outline: 2px solid var(--negro); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="encabezado">
+  <div class="marca">
+    <span class="rombo"></span>
+    <h1>LUCCHAMO</h1>
+  </div>
+  <p class="subtitulo">
+    Índice de proyectos de <strong>Lucía Chaverri Morales</strong>.
+    Cada tarjeta enlaza directamente al archivo HTML correspondiente.
+  </p>
+</header>
+
+<nav class="filtros" id="filtros" aria-label="Filtrar por categoría"></nav>
+
+<main class="contenedor">
+  <p id="contador" style="font-size:13px; color:var(--gris-suave); margin: 0 0 4px;"></p>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer class="pie">
+  <span class="marca-pie"><span class="rombo suave"></span> LUCCHAMO — repositorio personal de proyectos</span>
+  <a href="#top">Volver arriba ↑</a>
+</footer>
+
+<script>
+/* ==========================================================================
+   CATÁLOGO DE PROYECTOS
+   ---------------------------------------------------------------------
+   Para agregar un nuevo proyecto, copie una plantilla como la de abajo
+   y agréguela al arreglo PROYECTOS. No hay que tocar el CSS ni el resto
+   del HTML — la tarjeta se genera sola.
+
+   {
+     titulo:      "Nombre del proyecto",
+     descripcion: "Una o dos líneas explicando de qué trata.",
+     categoria:   "Nombre de categoría",
+     archivo:     "proyectos/nombre-del-archivo.html",
+     fecha:       "2026-07"
+   }
+
+   Elimine los dos proyectos marcados "Ejemplo" cuando suba los suyos.
+   ========================================================================== */
+
+const PROYECTOS = [
+  {
+    titulo: "Dashboard Competitivo Purdython",
+    descripcion: "Tablero interactivo que integra datos de BAC, Unimer y campañas internas para comparar condiciones de mercado.",
+    categoria: "Ejemplo — Inteligencia de Mercado",
+    archivo: "proyectos/dashboard-purdython.html",
+    fecha: "2026-06"
+  },
+  {
+    titulo: "Registro de Incidentes de Cierre",
+    descripcion: "Bitácora de incidentes del cierre mensual para el Foro de Operaciones, con marcadores de automatización.",
+    categoria: "Ejemplo — Operaciones",
+    archivo: "proyectos/registro-incidentes.html",
+    fecha: "2026-06"
+  }
+];
+
+const grid = document.getElementById("grid");
+const filtrosContenedor = document.getElementById("filtros");
+const contador = document.getElementById("contador");
+
+function esEjemplo(categoria) { return categoria.toLowerCase().startsWith("ejemplo"); }
+function slug(texto) { return texto.toLowerCase().replace(/[^a-z0-9]+/g, "-"); }
+function iconoFlecha() {
+  return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>`;
+}
+
+function crearTarjeta(p) {
+  const cat = esEjemplo(p.categoria) ? "ejemplo" : slug(p.categoria);
+  return `
+    <div class="tarjeta" data-categoria="${cat}">
+      <a class="tarjeta-link" href="${p.archivo}">
+        <span class="tarjeta-etiqueta">
+          <span class="rombo ${esEjemplo(p.categoria) ? 'suave' : 'acento'}"></span>
+          ${p.categoria}
+        </span>
+        <h2>${p.titulo}</h2>
+        <p>${p.descripcion}</p>
+        <div class="tarjeta-pie">
+          <span>${p.fecha}</span>
+          <span class="tarjeta-abrir">Abrir proyecto ${iconoFlecha()}</span>
+        </div>
+      </a>
+    </div>`;
+}
+
+function categoriasUnicas() {
+  const vistas = new Map();
+  PROYECTOS.forEach(p => {
+    const cat = esEjemplo(p.categoria) ? "ejemplo" : slug(p.categoria);
+    if (!vistas.has(cat)) vistas.set(cat, p.categoria);
+  });
+  return vistas;
+}
+
+function render(filtro = "todos") {
+  const lista = filtro === "todos"
+    ? PROYECTOS
+    : PROYECTOS.filter(p => (esEjemplo(p.categoria) ? "ejemplo" : slug(p.categoria)) === filtro);
+
+  if (lista.length === 0) {
+    grid.innerHTML = `
+      <div class="vacio" style="grid-column: 1 / -1;">
+        <span class="rombo suave"></span>
+        <h3>Sin proyectos en esta categoría</h3>
+        <p>Agregue una entrada al arreglo PROYECTOS.</p>
+      </div>`;
+  } else {
+    grid.innerHTML = lista.map(crearTarjeta).join("");
+  }
+
+  contador.textContent = `${PROYECTOS.length} proyecto${PROYECTOS.length === 1 ? "" : "s"} en el índice`;
+}
+
+function construirFiltros() {
+  const cats = categoriasUnicas();
+  let chips = `<button class="chip activo" data-filtro="todos">Todos</button>`;
+  cats.forEach((nombre, clave) => {
+    chips += `<button class="chip" data-filtro="${clave}">${nombre}</button>`;
+  });
+  filtrosContenedor.innerHTML = chips;
+
+  filtrosContenedor.querySelectorAll(".chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      filtrosContenedor.querySelectorAll(".chip").forEach(c => c.classList.remove("activo"));
+      chip.classList.add("activo");
+      render(chip.dataset.filtro);
+    });
+  });
+}
+
+construirFiltros();
+render();
+</script>
+
+</body>
+</html>
