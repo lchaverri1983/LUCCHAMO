@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha de Producto — Toyota Raize Estrená Hoy · CAFSA</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:   #000000;
+    --white:   #FFFFFF;
+    --gray:    #8A8C8E;
+    --gray-lt: #F2F4F6;
+    --gray-md: #E4E7EA;
+    --steel:   #A8B8C8;
+    --steel-dk:#6A8898;
+    --steel-lt:#D8E4EE;
+    --green:   #2A7A3B;
+    --green-bg:#EAF5ED;
+    --amber:   #B06800;
+    --amber-bg:#FFF5E0;
+    --red:     #CC2200;
+    --red-bg:  #FFEAEA;
+    --blue:    #1A4A7A;
+    --blue-bg: #E8F0FA;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--black);
+    background: var(--white);
+  }
+
+  /* ── TOP HEADER ── */
+  .top-bar {
+    background: var(--black);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .top-bar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .cafsa-logo {
+    width: 32px;
+    height: 32px;
+  }
+  .top-bar-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--white);
+    letter-spacing: .04em;
+  }
+  .top-bar-sub {
+    font-size: 11px;
+    color: var(--steel);
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .top-bar-nav {
+    display: flex;
+    gap: 4px;
+  }
+  .top-bar-nav a {
+    color: var(--steel);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: color .15s, background .15s;
+  }
+  .top-bar-nav a:hover { color: var(--white); background: rgba(255,255,255,.08); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--white);
+    padding: 3rem 2rem 2.5rem;
+    border-bottom: 3px solid var(--black);
+    border-top: 1px solid var(--gray-md);
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; }
+  .hero-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: .6rem;
+  }
+  .hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--black);
+    line-height: 1.1;
+    margin-bottom: .4rem;
+  }
+  .hero-title span { color: var(--steel-dk); }
+  .hero-subtitle {
+    font-size: 14px;
+    color: var(--gray);
+    font-weight: 400;
+    margin-bottom: 2rem;
+  }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+    background: transparent;
+    border-radius: 6px;
+    overflow: visible;
+  }
+  .hero-meta-item {
+    background: var(--gray-lt);
+    padding: .7rem 1rem;
+  }
+  .hero-meta-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 2px;
+  }
+  .hero-meta-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .hero-meta-value.status-active { color: #6EE39A; }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  /* ── DESCRIPTION CARD ── */
+  .desc-card {
+    background: var(--gray-lt);
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    border-left: 4px solid var(--steel-dk);
+    border-radius: 0 8px 8px 0;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #2C3440;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+  .section-hd-num {
+    width: 28px;
+    height: 28px;
+    background: var(--black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+  .section-hd-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--black);
+    flex: 1;
+  }
+  .section-hd::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-md);
+  }
+  .section { margin-bottom: 2.5rem; }
+
+  /* ── CONDITIONS TABLE ── */
+  .filter-bar {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: .75rem;
+  }
+  .filter-btn {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1.5px solid var(--gray-md);
+    background: var(--white);
+    cursor: pointer;
+    transition: all .15s;
+    color: var(--gray);
+  }
+  .filter-btn:hover { border-color: var(--steel); color: var(--steel-dk); }
+  .filter-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
+  .cond-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .cond-table thead th {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .cond-table tbody tr { border-bottom: 1px solid var(--gray-md); transition: background .1s; }
+  .cond-table tbody tr:last-child { border-bottom: none; }
+  .cond-table tbody tr:hover { background: var(--gray-lt); }
+  .cond-table tbody tr.hidden { display: none; }
+  .cond-table td { padding: 10px 14px; vertical-align: top; font-size: 13px; }
+  .cond-table td:first-child {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--black);
+    width: 22%;
+    white-space: nowrap;
+  }
+  .cond-table td:nth-child(2) { color: #2C3440; width: 66%; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+    letter-spacing: .04em;
+    white-space: nowrap;
+  }
+  .b-green  { background: var(--green-bg); color: var(--green); }
+  .b-amber  { background: var(--amber-bg); color: var(--amber); }
+  .b-red    { background: var(--red-bg);   color: var(--red); }
+  .b-blue   { background: var(--blue-bg);  color: var(--blue); }
+  .b-steel  { background: var(--steel-lt); color: var(--steel-dk); }
+
+  /* ── PROCESS FLOW ── */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .flow-step {
+    display: grid;
+    grid-template-columns: 44px 130px 1fr;
+    align-items: stretch;
+    border-bottom: 1px solid var(--gray-md);
+  }
+  .flow-step:last-child { border-bottom: none; }
+  .flow-num {
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--white);
+  }
+  .flow-actor {
+    background: var(--gray-lt);
+    padding: 12px 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--steel-dk);
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    border-right: 1px solid var(--gray-md);
+  }
+  .flow-desc { padding: 12px 16px; font-size: 13px; color: #2C3440; display: flex; align-items: center; }
+
+  /* ── PENDING TABLE ── */
+  .pend-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .pend-table thead th {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .pend-table tbody tr { border-bottom: 1px solid var(--gray-md); }
+  .pend-table tbody tr:last-child { border-bottom: none; }
+  .pend-table tbody tr:hover { background: var(--gray-lt); }
+  .pend-table td { padding: 10px 14px; font-size: 13px; vertical-align: top; }
+  .pend-table td:first-child { font-weight: 600; color: var(--black); width: 30%; }
+  .pend-table td:nth-child(2) { color: #444; width: 42%; }
+  .pend-table td:nth-child(3) { color: var(--gray); font-size: 12px; width: 18%; }
+  .pend-table td:nth-child(4) { width: 10%; }
+
+  /* ── INTEREST TABLE ── */
+  .int-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    font-size: 13px;
+  }
+  .int-table thead th {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .int-table tr { border-bottom: 1px solid var(--gray-md); }
+  .int-table tr:last-child { border-bottom: none; }
+  .int-table tr:nth-child(even) td { background: var(--gray-lt); }
+  .int-table td { padding: 9px 14px; text-align: right; }
+  .int-table td:first-child { text-align: left; font-weight: 600; color: var(--black); }
+  .int-table tfoot td { background: var(--steel-lt); font-weight: 700; border-top: 2px solid var(--steel); color: var(--steel-dk); }
+
+  /* ── CONTACTS ── */
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+  }
+  .contact-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 14px 16px;
+    border-left: 3px solid var(--steel);
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .contact-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--black);
+    margin-bottom: 2px;
+  }
+  .contact-role {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 5px;
+  }
+  .contact-email {
+    font-size: 11px;
+    color: var(--steel-dk);
+    font-style: italic;
+  }
+
+  /* ── DISCLAIMER ── */
+  .disclaimer {
+    background: var(--white);
+    border: 1px solid var(--gray-md);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-size: 11.5px;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    background: var(--black);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 3rem;
+  }
+  .page-footer span {
+    font-size: 11px;
+    color: var(--steel);
+    font-family: 'Open Sans', sans-serif;
+  }
+  .diamond {
+    color: var(--steel-dk);
+    font-size: 18px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .top-bar-nav { display: none; }
+    .flow-step { grid-template-columns: 36px 1fr; }
+    .flow-actor { display: none; }
+    .cond-table td:first-child { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="top-bar">
+  <div class="top-bar-brand">
+    <svg class="cafsa-logo" viewBox="0 0 32 32" fill="none">
+      <rect width="32" height="32" fill="#000"/>
+      <path d="M7 16L16 7L25 16L16 25L7 16Z" fill="#A8B8C8" opacity=".7"/>
+      <path d="M11 16L16 11L21 16L16 21L11 16Z" fill="#A8B8C8"/>
+    </svg>
+    <div>
+      <div class="top-bar-name">CAFSA Grupo Financiero</div>
+      <div class="top-bar-sub">Ficha de Producto Interno · Confidencial</div>
+    </div>
+  </div>
+  <nav class="top-bar-nav">
+    <a href="#condiciones">Condiciones</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#pendientes">Pendientes</a>
+    <a href="#intereses">Intereses</a>
+    <a href="#equipo">Equipo</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">AOFF-RAZ-01 · Arrendamiento Operativo · Alianza Purdy Motor</div>
+    <h1 class="hero-title">Toyota Raize <span>— Estrená Hoy</span></h1>
+    <p class="hero-subtitle">Promoción comercial de financiamiento · Persona física y jurídica</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Vigencia</div>
+        <div class="hero-meta-value">20 jun – 31 jul 2026</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Prima</div>
+        <div class="hero-meta-value">10%</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Tasa fija</div>
+        <div class="hero-meta-value">8,70% USD · 9,5% CRC</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Plazo</div>
+        <div class="hero-meta-value">96 meses</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">1.ª cuota</div>
+        <div class="hero-meta-value">Enero 2027</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Estado</div>
+        <div class="hero-meta-value status-active">En comercialización</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Versión</div>
+        <div class="hero-meta-value">v5.0 · Jul 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="page">
+
+  <!-- 1. DESCRIPCIÓN -->
+  <section class="section" id="descripcion">
+    <div class="section-hd">
+      <div class="section-hd-num">1</div>
+      <div class="section-hd-title">Descripción del Producto</div>
+    </div>
+    <div class="desc-card">
+      Campaña comercial de financiamiento para el Toyota Raize RZ14 modelo 2026, a solicitud de Purdy Motor. El cliente accede al vehículo bajo la modalidad AOFF con una prima del 10%, comisión de desembolso del 3%, plazo de 96 meses y tasa fija del 9,5% en colones / 8,70% en dólares durante los primeros 4 años. Incluye un período de gracia hasta el 31 de diciembre de 2026 durante el cual el cliente paga únicamente el seguro y la mensualidad del GPS; la primera cuota AOFF vence en enero 2027. El vehículo se financia sin extras. Purdy Motor reconoce los intereses del período de gracia mediante facturación mensual de CAFSA registrada como gasto financiero en vehículos nuevos. Vigencia de la promoción: 20 de junio al 31 de julio de 2026 — cierre definitivo, no se coloca en agosto.
+    </div>
+  </section>
+
+  <!-- 2. CONDICIONES -->
+  <section class="section" id="condiciones">
+    <div class="section-hd">
+      <div class="section-hd-num">2</div>
+      <div class="section-hd-title">Condiciones del Producto</div>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterTable('all', this)">Todas</button>
+      <button class="filter-btn" onclick="filterTable('Definido', this)">Definido</button>
+      <button class="filter-btn" onclick="filterTable('Aclarado', this)">Aclarado</button>
+      <button class="filter-btn" onclick="filterTable('Pendiente', this)">Pendiente</button>
+    </div>
+
+    <table class="cond-table" id="condTable">
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Condición</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-status="Definido"><td>Modalidad</td><td>AOFF — Arrendamiento Operativo en función financiera con opción de compra</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Vehículo</td><td>Toyota Raize RZ14, modelo 2026, sin extras</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Prima inicial</td><td>10% sobre el valor del vehículo, sujeta a aprobación crediticia</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Comisión desembolso</td><td>3% sobre el monto financiado</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Plazo</td><td>96 meses</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Tasa de interés</td><td>Fija 9,5% en colones / 8,70% en dólares durante los primeros 4 años. A partir del año 5 aplica tasa variable (SOFR en USD / TBP en colones). Se formaliza en dólares para generadores de USD.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Moneda</td><td>Dólares (USD) para generadores de $. Opción en colones (CRC) según perfil.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Precio de referencia</td><td>Desde USD $25,590. Precio "desde", sujeto a disponibilidad y equipamiento.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Extras en financiamiento</td><td>No aplican. El vehículo se financia sin extras.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Período de gracia</td><td>Hasta el 31 de diciembre de 2026. Durante este período el cliente paga el seguro + la mensualidad del dispositivo GPS como un solo rubro. El desglose se refleja internamente en cobros especiales en la tabla de pagos.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Primera cuota</td><td>Enero 2027 — mismo día del mes en que se formaliza la operación (confirmación Fiorella, 10 jul).</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Vigencia promoción</td><td>Del 20 de junio al 31 de julio de 2026, ambas fechas inclusive. Cierre definitivo el 31 de julio — no se coloca en agosto ni posterior.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Seguro de desempleo</td><td>Para asalariados: se incluye en el financiamiento según lo indica CAFSA.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Reconocimiento intereses</td><td>CAFSA emite factura mensual a Purdy por intereses reconocidos. Responsable: Contabilidad (Mauricio) — verifica documentación de Purdy contra Abanks, registra el pago y emite la factura como cuenta por cobrar. Purdy deposita y cancela.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Registro en Abanks</td><td>Cuenta de interés reconocido PM (réplica del proceso Purdy Cuotas con tasa 0%). TI replica pantalla de cotización.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Contrato AOFF</td><td>4 versiones (PF/PJ en $ y ₡) elaboradas por Consortium Legal (v.010726). Contrato enviado a TI — en desarrollo en MIRA (estimado ~1 semana). Pendiente legal: Cláusula 9 (folleto tasa variable) y confirmación tabla penalidades con Oscar.</td><td><span class="badge b-amber">En proceso</span></td></tr>
+        <tr data-status="Definido"><td>Disclaimer legal</td><td>Aprobado por Consortium Legal. URLs: cafsa.fi.cr y toyota.com. Con advertencia MEIC.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Reglamento</td><td>Publicado en www.cafsa.fi.cr y www.toyota.com. ✓ Ambas publicaciones confirmadas.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Aclarado"><td>Tasa mínima</td><td>El contrato establece una tasa mínima para el tramo variable (año 5+). No se especifica como campo fijo — se define en MIRA por operación. Condición correcta en el contrato.</td><td><span class="badge b-steel">Aclarado</span></td></tr>
+        <tr data-status="Definido"><td>Límite de kilómetros</td><td>30,000 km/año. Por cada km en exceso la ARRENDATARIA paga ₡150 colones exactos, cargo incluido automáticamente en la cuota siguiente (Cláusula 4.h). Aplica en colones para todos los contratos, incluyendo los denominados en dólares.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>GPS / Dispositivo satelital</td><td>Confirmado: todos los vehículos llevan GPS sin excepción. El costo de la mensualidad se incluye en la cuota junto con el seguro como un solo rubro al cliente. El proveedor del servicio no se especifica en el contrato (puede cambiar).</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Aclarado"><td>Salida del país</td><td>El vehículo puede salir del territorio nacional únicamente con autorización escrita previa de CAFSA, solicitada hasta 12 meses después del inicio del arrendamiento (Cláusula 2). Por confirmar si esta opción se mantiene para el Raize o si se elimina como en el Montacargas.</td><td><span class="badge b-amber">Por confirmar</span></td></tr>
+        <tr data-status="Definido"><td>Opción de compra / Valor residual</td><td>Cláusula 34 establece opción de compra al final del plazo. El precio se completa caso a caso en MIRA. El Raize SÍ se inscribe en el Registro Nacional — traspaso registral aplica, gastos corren por cuenta de la ARRENDATARIA.</td><td><span class="badge b-green">Definido</span></td></tr>
+        <tr data-status="Definido"><td>Seguro</td><td>Quálitas — póliza vehicular con cobertura de robo incluida. El Anexo 2 del contrato incluye el procedimiento de robo/hurto (denuncia OIJ, inspector Quálitas), lo cual es consistente con la póliza.</td><td><span class="badge b-green">Definido</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 3. PROCESO -->
+  <section class="section" id="proceso">
+    <div class="section-hd">
+      <div class="section-hd-num">3</div>
+      <div class="section-hd-title">Flujo del Proceso Comercial</div>
+    </div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-actor">Purdy Motor</div>
+        <div class="flow-desc">La fuerza de ventas de Purdy identifica al cliente y presenta la promoción Estrená Hoy como opción de financiamiento AOFF.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-actor">Purdy → CAFSA</div>
+        <div class="flow-desc">El cliente es referido a CAFSA para el proceso de análisis crediticio.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-actor">CAFSA — Crédito</div>
+        <div class="flow-desc">Evaluación del perfil crediticio, aprobación del financiamiento y determinación de la cuota integral según condiciones del producto.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div class="flow-actor">CAFSA — Operaciones</div>
+        <div class="flow-desc">Formalización del contrato AOFF y pagaré. Carga en MIRA. Activación del aseguramiento con Quálitas.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">5</div>
+        <div class="flow-actor">Purdy Motor</div>
+        <div class="flow-desc">Entrega del vehículo Toyota Raize RZ14 al cliente.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">6</div>
+        <div class="flow-actor">Cliente</div>
+        <div class="flow-desc">Durante el período de gracia (jul–dic 2026) paga seguro + mensualidad GPS como un solo rubro. Primera cuota AOFF en enero 2027.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">7</div>
+        <div class="flow-actor">CAFSA — Contabilidad</div>
+        <div class="flow-desc">Mauricio factura mensualmente a Purdy los intereses del período de gracia. Purdy deposita y cancela la factura como gasto financiero en vehículos nuevos.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PENDIENTES -->
+  <section class="section" id="pendientes">
+    <div class="section-hd">
+      <div class="section-hd-num">4</div>
+      <div class="section-hd-title">Pendientes Operativos y Legales</div>
+    </div>
+    <table class="pend-table">
+      <thead>
+        <tr>
+          <th>Pendiente</th>
+          <th>Detalle</th>
+          <th>Responsable</th>
+          <th>Prioridad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Corrección Cláusula 9 del contrato</td>
+          <td>El folleto explica tasa variable cuando el producto tiene tasa fija los primeros 4 años. Oscar Sandoval debe corregirla en los 4 contratos.</td>
+          <td>Oscar Sandoval (CL)</td>
+          <td><span class="badge b-red">Urgente</span></td>
+        </tr>
+        <tr>
+          <td>Definir tabla de penalidades</td>
+          <td>El contrato tiene tabla hasta 96 meses; la tabla de Fiorella (30 jun) llega a 60 meses con estructura diferente. Confirmar cuál aplica al Raize.</td>
+          <td>Fiorella / Oscar</td>
+          <td><span class="badge b-red">Urgente</span></td>
+        </tr>
+        <tr>
+          <td>Aclarar exclusión de robo en Anexo 2 — REVISADO</td>
+          <td>La póliza SÍ incluye robo. El Anexo 2 es consistente. Este punto quedó cerrado — no es una inconsistencia.</td>
+          <td>—</td>
+          <td><span class="badge b-green">✓ Cerrado</span></td>
+        </tr>
+        <tr>
+          <td>Confirmar salida del país (Cláusula 2)</td>
+          <td>El contrato permite autorización para salir del país. Confirmar si se mantiene esta opción para el Raize o se elimina como en el Montacargas.</td>
+          <td>Fiorella Gould</td>
+          <td><span class="badge b-amber">Alta</span></td>
+        </tr>
+        <tr>
+          <td>Contrato en desarrollo — MIRA</td>
+          <td>Contrato v.010726 (4 versiones) enviado a TI. En desarrollo en MIRA, estimado ~1 semana. Cristopher Pérez lidera.</td>
+          <td>Cristopher Pérez / TI</td>
+          <td><span class="badge b-amber">En proceso</span></td>
+        </tr>
+        <tr>
+          <td>VB final artes Garnier BBDO</td>
+          <td>VB dado. ✓ Cerrado.</td>
+          <td>—</td>
+          <td><span class="badge b-green">✓ Cerrado</span></td>
+        </tr>
+        <tr>
+          <td>Publicación reglamento</td>
+          <td>Publicado en www.cafsa.fi.cr y www.toyota.com. ✓ Confirmado.</td>
+          <td>—</td>
+          <td><span class="badge b-green">✓ Cerrado</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 5. INTERESES -->
+  <section class="section" id="intereses">
+    <div class="section-hd">
+      <div class="section-hd-num">5</div>
+      <div class="section-hd-title">Reconocimiento de Intereses — Montos por Mes de Formalización</div>
+    </div>
+    <table class="int-table">
+      <thead>
+        <tr>
+          <th>Mes formalización</th>
+          <th>Meses de gracia</th>
+          <th>Interés mensual (USD)</th>
+          <th>Total a reconocer (USD)</th>
+          <th>Equivalente (CRC aprox.)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Julio 2026</td><td>6 meses (jul–dic)</td><td>Según tabla CAFSA</td><td>6 × cuota interés</td><td>Purdy factura mensual</td></tr>
+        <tr><td>Agosto 2026</td><td>5 meses (ago–dic)</td><td>Según tabla CAFSA</td><td>5 × cuota interés</td><td>Purdy factura mensual</td></tr>
+        <tr><td>Septiembre 2026</td><td>4 meses (sep–dic)</td><td>Según tabla CAFSA</td><td>4 × cuota interés</td><td>Purdy factura mensual</td></tr>
+        <tr><td>Octubre 2026</td><td>3 meses (oct–dic)</td><td>Según tabla CAFSA</td><td>3 × cuota interés</td><td>Purdy factura mensual</td></tr>
+        <tr><td>Noviembre 2026</td><td>2 meses (nov–dic)</td><td>Según tabla CAFSA</td><td>2 × cuota interés</td><td>Purdy factura mensual</td></tr>
+        <tr><td>Diciembre 2026</td><td>1 mes (dic)</td><td>Según tabla CAFSA</td><td>1 × cuota interés</td><td>Purdy factura mensual</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="5">Responsable CAFSA: Contabilidad (Mauricio). Operativa: verificación Abanks → factura → cuenta por cobrar → cancelación Purdy. Sin ajuste en operaciones Abanks.</td></tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <!-- 6. EQUIPO -->
+  <section class="section" id="equipo">
+    <div class="section-hd">
+      <div class="section-hd-num">6</div>
+      <div class="section-hd-title">Equipo del Proyecto</div>
+    </div>
+    <div class="contacts-grid">
+      <div class="contact-card">
+        <div class="contact-name">Fiorella Gould Ávalos</div>
+        <div class="contact-role">Gerente de Producto / Líder del proyecto</div>
+        <div class="contact-email">fgould@cafsa.fi.cr</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-name">Lucía Chaverri Morales</div>
+        <div class="contact-role">Jefa de Innovación y Mercadeo</div>
+        <div class="contact-email">lchaverri@cafsa.fi.cr</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-name">José Paulo Martínez Brenes</div>
+        <div class="contact-role">Gerente de Operaciones</div>
+        <div class="contact-email">jmartinezb@cafsa.fi.cr</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-name">Jason Rojas Cordero</div>
+        <div class="contact-role">TI — carga en MIRA / tracking</div>
+        <div class="contact-email">jrojas@cafsa.fi.cr</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-name">Cristopher Pérez Ugalde</div>
+        <div class="contact-role">TI — construcción del producto en MIRA</div>
+        <div class="contact-email">cperez@cafsa.fi.cr</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-name">Anthony Jiménez Jiménez</div>
+        <div class="contact-role">Operaciones / Abanks / TI</div>
+        <div class="contact-email">ajimenez@cafsa.fi.cr</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-name">Oscar Sandoval Morales</div>
+        <div class="contact-role">Consortium Legal — contratos y pagaré</div>
+        <div class="contact-email">osandoval@consortiumlegal.com</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-name">Julio Garro Sánchez</div>
+        <div class="contact-role">Purdy Motor — Marketing</div>
+        <div class="contact-email">jgarros@grupopurdy.com</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-name">Mauricio</div>
+        <div class="contact-role">Contabilidad CAFSA — facturación intereses</div>
+        <div class="contact-email">Contabilidad CAFSA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. DISCLAIMER -->
+  <section class="section" id="disclaimer">
+    <div class="section-hd">
+      <div class="section-hd-num">7</div>
+      <div class="section-hd-title">Disclaimer Legal Aprobado</div>
+    </div>
+    <div class="disclaimer">
+      <strong>Reglamento disponible en:</strong> <a href="https://www.cafsa.fi.cr" style="color:var(--steel-dk)">www.cafsa.fi.cr</a> y <a href="https://www.toyota.com" style="color:var(--steel-dk)">www.toyota.com</a><br><br>
+      Aprobado por Consortium Legal (Oscar Sandoval). Incluye advertencia del Ministerio de Economía, Industria y Comercio (MEIC). Aplica condiciones de aprobación crediticia. Arrendadora CAFSA S.A. — cédula jurídica 3-101-286181. El brazo financiero de Grupo Purdy.
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <span>CAFSA Grupo Financiero · AOFF-RAZ-01 · v5.0 · Julio 2026 · Jefatura de Innovación y Mercadeo · Confidencial — Solo circulación interna</span>
+  <span class="diamond">◆</span>
+</footer>
+
+<script>
+  function filterTable(status, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#condTable tbody tr').forEach(row => {
+      if (status === 'all') {
+        row.classList.remove('hidden');
+      } else {
+        const s = row.dataset.status || '';
+        const badge = row.querySelector('.badge');
+        const badgeTxt = badge ? badge.textContent.trim() : '';
+        if (badgeTxt.includes(status) || s.includes(status)) {
+          row.classList.remove('hidden');
+        } else {
+          row.classList.add('hidden');
+        }
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
